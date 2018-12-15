@@ -3,5 +3,10 @@
 
     <item android:drawable="@drawable/green_button" android:state_enabled="true" android:state_pressed="false" />
     <item android:drawable="@drawable/green_button_pressed" android:state_pressed="true" />
+    <item android:state_enabled="false">
+        <bitmap xmlns:android="http://schemas.android.com/apk/res/android"
+            android:src="@drawable/green_button"
+            android:tint="#88F0F0F0" android:tintMode="src_atop"/>
+    </item>
 
 </selector>
