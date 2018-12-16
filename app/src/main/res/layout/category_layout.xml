@@ -21,12 +21,12 @@
         android:text="@string/title_activity_welcome"
         android:textColor="@color/white"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/logo"
-        app:layout_constraintStart_toEndOf="@+id/logo"
-        app:layout_constraintTop_toTopOf="@+id/logo" />
+        app:layout_constraintBottom_toBottomOf="@+id/player"
+        app:layout_constraintStart_toEndOf="@+id/player"
+        app:layout_constraintTop_toTopOf="@+id/player" />
 
     <ImageView
-        android:id="@+id/logo"
+        android:id="@+id/player"
         android:layout_width="32sp"
         android:layout_height="32sp"
         android:layout_marginStart="8dp"
@@ -47,23 +47,12 @@
         android:text="@string/round"
         android:textColor="@color/white"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/logo"
-        app:layout_constraintEnd_toStartOf="@+id/player"
+        app:layout_constraintBottom_toBottomOf="@+id/player"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/title"
-        app:layout_constraintTop_toTopOf="@+id/logo"
+        app:layout_constraintTop_toTopOf="@+id/player"
         tools:text="Ronda 1" />
-
-    <ImageView
-        android:id="@+id/player"
-        android:layout_width="32sp"
-        android:layout_height="32sp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="8dp"
-        android:src="@drawable/avatar_2"
-        android:background="@drawable/selected_avatar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 
     <!-- END HEADER -->
@@ -81,7 +70,7 @@
         android:fontFamily="@font/birdgame"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo"
+        app:layout_constraintTop_toBottomOf="@+id/player"
         tools:text="@string/question" />
 
     <TextView

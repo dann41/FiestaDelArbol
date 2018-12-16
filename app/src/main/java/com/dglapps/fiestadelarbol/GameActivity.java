@@ -30,7 +30,7 @@ public class GameActivity extends FullScreenActivity {
 
     public void displayRoulette() {
         Fragment fragment = new CategorySelectionFragment();
-        displayFragment(fragment, "roulette");
+        displayFragment(fragment, "roulette", false);
     }
 
     public void backToRoulette() {
@@ -40,13 +40,15 @@ public class GameActivity extends FullScreenActivity {
     public void displayCategory(Category category) {
         CategoryFragment fragment = new CategoryFragment();
         fragment.setArguments(getCategoryBundle(category));
-        displayFragment(fragment, "category");
+        displayFragment(fragment, "category", true);
     }
 
-    private void displayFragment(Fragment fragment, String tag) {
+    private void displayFragment(Fragment fragment, String tag, boolean addToBackStack) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.add(R.id.fragment_container, fragment, tag);
-        ft.addToBackStack(null);
+        if (addToBackStack) {
+            ft.addToBackStack(null);
+        }
         ft.commit();
     }
 

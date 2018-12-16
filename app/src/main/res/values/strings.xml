@@ -19,4 +19,5 @@
     <string name="continue_game">Siguiente</string>
     <string name="answer">Respuesta</string>
     <string name="round">Ronda %1$d</string>
+    <string name="remove_player">Eliminar jugador</string>
 </resources>

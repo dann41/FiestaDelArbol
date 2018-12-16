@@ -21,12 +21,7 @@ public class PlayerSelectionActivity extends FullScreenActivity {
 
     private View mContentView;
 
-    private Player[] players = new Player[] {
-        new Player(1, null, -1),
-        new Player(2, null, -1),
-        new Player(3, null, -1),
-        new Player(4, null, -1)
-    };
+    private Player[] players = initPlayers();
 
     private Button startGame;
 
@@ -92,6 +87,15 @@ public class PlayerSelectionActivity extends FullScreenActivity {
         refreshScreen();
     }
 
+    private Player[] initPlayers() {
+        return new Player[] {
+                new Player(1, null, -1),
+                new Player(2, null, -1),
+                new Player(3, null, -1),
+                new Player(4, null, -1)
+        };
+    }
+
     private void startGame() {
         GameService gameService = ServiceLocator.getInstance().getGameService();
         gameService.initGame(Arrays.asList(players));
@@ -105,6 +109,8 @@ public class PlayerSelectionActivity extends FullScreenActivity {
     public void refreshScreen() {
         hideSystemBar();
         List<Player> storedPlayers = ServiceLocator.getInstance().getPlayerService().getPlayers();
+
+        players = initPlayers();
         for (Player player : storedPlayers) {
             players[player.getPlayerId() - 1] = player;
         }
@@ -116,6 +122,8 @@ public class PlayerSelectionActivity extends FullScreenActivity {
             String playerName = players[i].getPlayerName();
             if (playerName != null && !playerName.isEmpty()) {
                 playerNames[i].setText(playerName);
+            } else {
+                playerNames[i].setText(R.string.add_player_hint);
             }
 
             int avatarId = players[i].getAvatarId();

@@ -37,4 +37,7 @@ public class PlayerService {
         return playerMap.get(playerId);
     }
 
+    public void removePlayer(int playerId) {
+        playerMap.remove(playerId);
+    }
 }

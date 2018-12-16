@@ -60,6 +60,16 @@ public class AddPlayerDialogFragment extends DialogFragment {
             }
         });
 
+        view.findViewById(R.id.remove_player).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (player.getPlayerName() != null && !player.getPlayerName().isEmpty()) {
+                    ServiceLocator.getInstance().getPlayerService().removePlayer(player.getPlayerId());
+                }
+                dismiss();
+            }
+        });
+
         initPlayer();
 
         return new AlertDialog.Builder(getContext(), R.style.Theme_AppCompat_Light_Dialog_MinWidth)

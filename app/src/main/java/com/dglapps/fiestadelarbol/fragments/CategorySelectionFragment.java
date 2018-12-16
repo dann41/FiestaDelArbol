@@ -40,6 +40,7 @@ public class CategorySelectionFragment extends Fragment {
 
         luckyWheel = v.findViewById(R.id.wheel);
         setWheelDuration(2000);
+        //luckyWheel.setBackgroundColor(getResources().getColor(R.color.white, null));
         luckyWheel.addWheelItems(getWheelItems());
         luckyWheel.setOnClickListener(new View.OnClickListener() {
             @Override
