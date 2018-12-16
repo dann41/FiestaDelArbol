@@ -9,17 +9,23 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.dglapps.fiestadelarbol.GameActivity;
 import com.dglapps.fiestadelarbol.R;
 import com.dglapps.fiestadelarbol.ServiceLocator;
 import com.dglapps.fiestadelarbol.domain.Category;
 import com.dglapps.fiestadelarbol.domain.Player;
+import com.dglapps.fiestadelarbol.domain.Question;
+import com.dglapps.fiestadelarbol.services.AvatarService;
 import com.dglapps.fiestadelarbol.services.GameService;
+import com.dglapps.fiestadelarbol.services.QuestionService;
 
 public class CategoryFragment extends Fragment {
 
     private View contentView;
+    private TextView roundView;
+    private ImageView avatarView;
     private TextView categoryView;
     private TextView questionView;
     private TextView answerView;
@@ -28,6 +34,8 @@ public class CategoryFragment extends Fragment {
 
     private GameActivity gameActivity;
     private GameService gameService;
+    private QuestionService questionService;
+    private AvatarService avatarService;
 
     private Category category;
 
@@ -37,6 +45,8 @@ public class CategoryFragment extends Fragment {
         View view = inflater.inflate(R.layout.category_layout, container, false);
 
         contentView = view.findViewById(R.id.category_layout);
+        roundView = view.findViewById(R.id.round);
+        avatarView = view.findViewById(R.id.player);
         categoryView = view.findViewById(R.id.category);
         questionView = view.findViewById(R.id.question);
         answerView = view.findViewById(R.id.answer);
@@ -60,8 +70,11 @@ public class CategoryFragment extends Fragment {
         });
 
         gameService = ServiceLocator.getInstance().getGameService();
+        questionService = ServiceLocator.getInstance().getQuestionService();
+        avatarService = ServiceLocator.getInstance().getAvatarService();
 
-        fillViews(gameService.nextPlayer());
+        category = getCategory();
+        fillViews(gameService.nextPlayer(), category, questionService.getNextQuestionForCategory(category));
 
         return contentView;
     }
@@ -79,38 +92,49 @@ public class CategoryFragment extends Fragment {
             gameService.nextRound();
             gameActivity.backToRoulette();
         } else {
-            fillViews(gameService.nextPlayer());
+            fillViews(gameService.nextPlayer(), category, questionService.getNextQuestionForCategory(category));
         }
     }
 
-    private void fillViews(Player player) {
+    private Category getCategory() {
         Bundle bundle = getArguments();
         if (bundle != null) {
             int categoryId = bundle.getInt("categoryId");
-            category = ServiceLocator.getInstance().getCategoryService().findById(categoryId);
+            return ServiceLocator.getInstance().getCategoryService().findById(categoryId);
+        }
+        return null;
+    }
 
-            contentView.setBackgroundColor(
-                    ResourcesCompat.getColor(
-                        getResources(),
-                        category.getColorId(),
-                        null
-                    ));
-            categoryView.setText(category.getNameId());
-            categoryView.setCompoundDrawablesWithIntrinsicBounds(category.getIconId(), 0, 0, 0);
+    private void fillViews(Player player, Category category, Question question) {
+        contentView.setBackgroundColor(
+                ResourcesCompat.getColor(
+                    getResources(),
+                    category.getColorId(),
+                    null
+                ));
 
-            if (category.isAnswerRequired()) {
-                nextButton.setEnabled(false);
-                answerButton.setVisibility(View.VISIBLE);
-            } else {
-                nextButton.setEnabled(true);
-                answerButton.setVisibility(View.INVISIBLE);
-            }
+        roundView.setText(String.format(getResources().getString(R.string.round), gameService.getRound()));
+        if (category.isAllPlay()) {
+            avatarView.setImageResource(R.drawable.people);
+        } else {
+            int resourceId = avatarService.getById(player.getAvatarId()).getResourceId();
+            avatarView.setImageResource(resourceId);
+        }
 
-            answerView.setVisibility(View.INVISIBLE);
+        categoryView.setText(category.getNameId());
+        categoryView.setCompoundDrawablesWithIntrinsicBounds(category.getIconId(), 0, 0, 0);
 
-            // TODO change this
-            questionView.setText(player.getPlayerName());
-            answerView.setText("Round " + gameService.getRound());
+        questionView.setText(question.getQuestion());
+
+        answerView.setVisibility(View.INVISIBLE);
+        answerView.setText(question.getAnswer());
+
+        if (category.isAnswerRequired()) {
+            nextButton.setEnabled(false);
+            answerButton.setVisibility(View.VISIBLE);
+        } else {
+            nextButton.setEnabled(true);
+            answerButton.setVisibility(View.INVISIBLE);
         }
     }
 }

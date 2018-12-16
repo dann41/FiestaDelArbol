@@ -1,9 +1,6 @@
 package com.dglapps.fiestadelarbol;
 
-import com.dglapps.fiestadelarbol.services.AvatarService;
-import com.dglapps.fiestadelarbol.services.CategoryService;
-import com.dglapps.fiestadelarbol.services.GameService;
-import com.dglapps.fiestadelarbol.services.PlayerService;
+import com.dglapps.fiestadelarbol.services.*;
 
 public final class ServiceLocator {
 
@@ -12,6 +9,7 @@ public final class ServiceLocator {
     private final AvatarService avatarService;
     private final CategoryService categoryService;
     private final GameService gameService;
+    private final QuestionService questionService;
 
     public static ServiceLocator getInstance() {
         if (instance == null) {
@@ -25,6 +23,7 @@ public final class ServiceLocator {
         avatarService = new AvatarService();
         categoryService = new CategoryService();
         gameService = new GameService();
+        questionService = new QuestionService();
     }
 
     public PlayerService getPlayerService() {
@@ -41,5 +40,9 @@ public final class ServiceLocator {
 
     public GameService getGameService() {
         return gameService;
+    }
+
+    public QuestionService getQuestionService() {
+        return questionService;
     }
 }

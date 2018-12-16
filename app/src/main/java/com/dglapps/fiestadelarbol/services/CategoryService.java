@@ -8,11 +8,11 @@ import java.util.Map;
 
 public class CategoryService {
 
-    private static final int QUICK = 0;
-    private static final int TRUE_FALSE = 1;
-    private static final int SKILL = 2;
-    private static final int QUESTION = 3;
-    private static final int MUSIC = 4;
+    public static final int QUICK = 0;
+    public static final int TRUE_FALSE = 1;
+    public static final int SKILL = 2;
+    public static final int QUESTION = 3;
+    public static final int MUSIC = 4;
 
     private final int[] SEQUENCE = new int[] {
             TRUE_FALSE, MUSIC, QUICK, QUESTION, SKILL,

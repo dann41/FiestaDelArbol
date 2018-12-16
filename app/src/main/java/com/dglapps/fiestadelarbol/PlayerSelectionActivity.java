@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.dglapps.fiestadelarbol.domain.Player;
 import com.dglapps.fiestadelarbol.fragments.AddPlayerDialogFragment;
 import com.dglapps.fiestadelarbol.services.GameService;
+import com.dglapps.fiestadelarbol.services.QuestionService;
 
 import java.util.Arrays;
 import java.util.List;
@@ -94,6 +95,9 @@ public class PlayerSelectionActivity extends FullScreenActivity {
     private void startGame() {
         GameService gameService = ServiceLocator.getInstance().getGameService();
         gameService.initGame(Arrays.asList(players));
+
+        QuestionService questionService = ServiceLocator.getInstance().getQuestionService();
+        questionService.loadQuestions(getApplicationContext());
 
         startActivity(new Intent(getApplicationContext(), GameActivity.class));
     }
