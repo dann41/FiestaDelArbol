@@ -16,4 +16,6 @@
     <string name="true_false">Verdadero o falso</string>
     <string name="skill">Habilidad</string>
     <string name="quick">Ronda rápida</string>
+    <string name="continue_game">Siguiente</string>
+    <string name="answer">Respuesta</string>
 </resources>

@@ -11,7 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.dglapps.fiestadelarbol.domain.Player;
 import com.dglapps.fiestadelarbol.fragments.AddPlayerDialogFragment;
+import com.dglapps.fiestadelarbol.services.GameService;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class PlayerSelectionActivity extends FullScreenActivity {
@@ -78,10 +80,6 @@ public class PlayerSelectionActivity extends FullScreenActivity {
         }
     }
 
-    private void startGame() {
-        startActivity(new Intent(getApplicationContext(), GameActivity.class));
-    }
-
     @Override
     protected View getContentView() {
         return mContentView;
@@ -91,6 +89,13 @@ public class PlayerSelectionActivity extends FullScreenActivity {
     protected void onResume() {
         super.onResume();
         refreshScreen();
+    }
+
+    private void startGame() {
+        GameService gameService = ServiceLocator.getInstance().getGameService();
+        gameService.initGame(Arrays.asList(players));
+
+        startActivity(new Intent(getApplicationContext(), GameActivity.class));
     }
 
     public void refreshScreen() {

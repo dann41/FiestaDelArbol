@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.res.ResourcesCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,27 +19,19 @@ import com.dglapps.fiestadelarbol.GameActivity;
 import com.dglapps.fiestadelarbol.R;
 import com.dglapps.fiestadelarbol.ServiceLocator;
 import com.dglapps.fiestadelarbol.domain.Category;
+import com.dglapps.fiestadelarbol.services.CategoryService;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.dglapps.fiestadelarbol.services.CategoryService.*;
-
 public class CategorySelectionFragment extends Fragment {
-
-    private final int[] PATTERN = new int[] {
-        TRUE_FALSE, MUSIC, QUICK, QUESTION, SKILL,
-        MUSIC, TRUE_FALSE, QUESTION, SKILL,
-        QUICK, QUESTION, MUSIC, TRUE_FALSE,
-        TRUE_FALSE, SKILL, QUESTION, MUSIC,
-        QUICK, QUESTION, MUSIC
-    };
 
     private GameActivity gameActivity;
     private LuckyWheel luckyWheel;
 
-    private int i = -1;
+    private CategoryService categoryService;
+    private Category selectedCategory;
 
     @Nullable
     @Override
@@ -53,17 +44,18 @@ public class CategorySelectionFragment extends Fragment {
         luckyWheel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                i = (i + 1) % PATTERN.length;
-                luckyWheel.rotateWheelTo(PATTERN[i]);
+                selectedCategory = categoryService.getRandomCategory();
+                luckyWheel.rotateWheelTo(selectedCategory.getId());
             }
         });
         luckyWheel.setLuckyWheelReachTheTarget(new OnLuckyWheelReachTheTarget() {
             @Override
             public void onReachTarget() {
-                Log.i("TEST", "Selected category " + PATTERN[i]);
-                displayFragmentForCategory(getCategory(i));
+                displayFragmentForCategory(selectedCategory);
             }
         });
+
+        categoryService = ServiceLocator.getInstance().getCategoryService();
 
         return v;
     }
@@ -76,10 +68,6 @@ public class CategorySelectionFragment extends Fragment {
         }
     }
 
-    private Category getCategory(int categoryId) {
-        return ServiceLocator.getInstance().getCategoryService().findById(categoryId);
-    }
-
     private void displayFragmentForCategory(final Category category) {
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -89,8 +77,6 @@ public class CategorySelectionFragment extends Fragment {
         }, 1000);
 
     }
-
-
 
     private List<WheelItem> getWheelItems() {
         List<WheelItem> wheelItems = Arrays.asList(

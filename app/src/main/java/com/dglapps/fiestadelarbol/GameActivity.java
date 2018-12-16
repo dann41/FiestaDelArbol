@@ -29,17 +29,24 @@ public class GameActivity extends FullScreenActivity {
     }
 
     public void displayRoulette() {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.fragment_container, new CategorySelectionFragment());
-        ft.commit();
+        Fragment fragment = new CategorySelectionFragment();
+        displayFragment(fragment, "roulette");
+    }
+
+    public void backToRoulette() {
+        getSupportFragmentManager().popBackStackImmediate();
     }
 
     public void displayCategory(Category category) {
         CategoryFragment fragment = new CategoryFragment();
         fragment.setArguments(getCategoryBundle(category));
+        displayFragment(fragment, "category");
+    }
 
+    private void displayFragment(Fragment fragment, String tag) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.fragment_container, fragment);
+        ft.add(R.id.fragment_container, fragment, tag);
+        ft.addToBackStack(null);
         ft.commit();
     }
 
@@ -48,4 +55,5 @@ public class GameActivity extends FullScreenActivity {
         bundle.putInt("categoryId", category.getId());
         return bundle;
     }
+
 }

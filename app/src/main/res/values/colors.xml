@@ -11,5 +11,6 @@
     <color name="colorTrueFalse">#A0D568</color>
     <color name="colorMusic">#FFCE54</color>
     <color name="colorQuick">#ED5564</color>
+    <color name="white">#FFFFFF</color>
 
 </resources>

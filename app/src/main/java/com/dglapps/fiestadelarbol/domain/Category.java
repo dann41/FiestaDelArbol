@@ -6,13 +6,20 @@ public class Category {
     private final int iconId;
     private final int colorId;
     private final int nameId;
+    private final boolean answerRequired;
+    private final boolean repetitionAllowed;
+    private final boolean allPlay;
 
 
-    public Category(int id, int iconId, int colorId, int nameId) {
+    public Category(int id, int iconId, int colorId, int nameId,
+                    boolean answerRequired, boolean repetitionAllowed, boolean allPlay) {
         this.id = id;
         this.iconId = iconId;
         this.colorId = colorId;
         this.nameId = nameId;
+        this.answerRequired = answerRequired;
+        this.repetitionAllowed = repetitionAllowed;
+        this.allPlay = allPlay;
     }
 
     public int getId() {
@@ -30,4 +37,17 @@ public class Category {
     public int getNameId() {
         return nameId;
     }
+
+    public boolean isAnswerRequired() {
+        return answerRequired;
+    }
+
+    public boolean isRepetitionAllowed() {
+        return repetitionAllowed;
+    }
+
+    public boolean isAllPlay() {
+        return allPlay;
+    }
+
 }
