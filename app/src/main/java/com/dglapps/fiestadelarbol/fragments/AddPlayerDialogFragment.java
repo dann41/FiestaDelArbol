@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import com.dglapps.fiestadelarbol.PlayerSelectionActivity;
 import com.dglapps.fiestadelarbol.R;
@@ -85,6 +86,8 @@ public class AddPlayerDialogFragment extends DialogFragment {
     @Override
     public void onStart() {
         super.onStart();
+
+        getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         getDialog().getWindow().setBackgroundDrawableResource(android.R.color.transparent);
     }
 
