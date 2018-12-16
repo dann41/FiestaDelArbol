@@ -1,5 +1,6 @@
 package com.dglapps.fiestadelarbol;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -34,9 +35,16 @@ public class PlayerSelectionActivity extends FullScreenActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player_selection);
-        mContentView = findViewById(R.id.game_screen);
+        mContentView = findViewById(R.id.player_selection);
 
         startGame = findViewById(R.id.start);
+
+        startGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startGame();
+            }
+        });
 
         playerNames = new TextView[] {
                 findViewById(R.id.player_1_name),
@@ -68,6 +76,10 @@ public class PlayerSelectionActivity extends FullScreenActivity {
                 }
             });
         }
+    }
+
+    private void startGame() {
+        startActivity(new Intent(getApplicationContext(), GameActivity.class));
     }
 
     @Override

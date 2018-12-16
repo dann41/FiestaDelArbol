@@ -11,4 +11,9 @@
     <string name="add_player_hint"><![CDATA[<Añadir jugador>]]></string>
     <string name="player_name">Nombre del equipo/jugador</string>
     <string name="choose_avatar">Escoge tu avatar</string>
+    <string name="question">Pregunta</string>
+    <string name="music">¡Música maestro!</string>
+    <string name="true_false">Verdadero o falso</string>
+    <string name="skill">Habilidad</string>
+    <string name="quick">Ronda rápida</string>
 </resources>

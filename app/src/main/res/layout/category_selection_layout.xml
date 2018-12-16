@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.bluehomestudio.luckywheel.LuckyWheel
+        android:id="@+id/wheel"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:background_color="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.23"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/question"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_marginTop="8dp"
+        android:drawableLeft="@drawable/question"
+        android:drawableTint="@color/colorQuestion"
+        android:fontFamily="@font/birdgame"
+        android:gravity="center_vertical"
+        android:text="@string/question"
+        android:textSize="18sp"
+        android:textColor="@color/colorQuestion"
+        app:layout_constraintBottom_toTopOf="@+id/music"
+        app:layout_constraintStart_toStartOf="@+id/music"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/music"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_marginTop="8dp"
+        android:drawableLeft="@drawable/music"
+        android:drawableTint="@color/colorMusic"
+        android:fontFamily="@font/birdgame"
+        android:gravity="center_vertical"
+        android:text="@string/music"
+        android:textSize="18sp"
+        android:textColor="@color/colorMusic"
+        app:layout_constraintBottom_toTopOf="@+id/true_false"
+        app:layout_constraintStart_toStartOf="@+id/true_false"
+        app:layout_constraintTop_toBottomOf="@+id/question" />
+
+    <TextView
+        android:id="@+id/true_false"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:drawableLeft="@drawable/true_false"
+        android:drawableTint="@color/colorTrueFalse"
+        android:fontFamily="@font/birdgame"
+        android:gravity="center_vertical"
+        android:text="@string/true_false"
+        android:textSize="18sp"
+        android:textColor="@color/colorTrueFalse"
+        app:layout_constraintBottom_toTopOf="@+id/skill"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/wheel"
+        app:layout_constraintTop_toBottomOf="@+id/music" />
+
+    <TextView
+        android:id="@+id/skill"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_marginTop="8dp"
+        android:drawableLeft="@drawable/skills"
+        android:drawableTint="@color/colorSkill"
+        android:fontFamily="@font/birdgame"
+        android:gravity="center_vertical"
+        android:text="@string/skill"
+        android:textSize="18sp"
+        android:textColor="@color/colorSkill"
+        app:layout_constraintBottom_toTopOf="@+id/quick"
+        app:layout_constraintStart_toStartOf="@+id/true_false"
+        app:layout_constraintTop_toBottomOf="@+id/true_false" />
+
+
+    <TextView
+        android:id="@+id/quick"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:drawableLeft="@drawable/quick"
+        android:drawableTint="@color/colorQuick"
+        android:fontFamily="@font/birdgame"
+        android:gravity="center_vertical"
+        android:text="@string/quick"
+        android:textSize="18sp"
+        android:textColor="@color/colorQuick"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/true_false"
+        app:layout_constraintTop_toBottomOf="@+id/skill" />
+
+</android.support.constraint.ConstraintLayout>
