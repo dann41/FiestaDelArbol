@@ -101,7 +101,7 @@ public class PlayerSelectionActivity extends FullScreenActivity {
         gameService.initGame(Arrays.asList(players));
 
         QuestionService questionService = ServiceLocator.getInstance().getQuestionService();
-        questionService.loadQuestions(getApplicationContext());
+        questionService.reset();
 
         startActivity(new Intent(getApplicationContext(), GameActivity.class));
     }

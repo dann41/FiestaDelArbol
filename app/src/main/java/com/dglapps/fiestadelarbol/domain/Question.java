@@ -23,4 +23,13 @@ public class Question {
     public int getCategoryId() {
         return categoryId;
     }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "question='" + question + '\'' +
+                ", answer='" + answer + '\'' +
+                ", categoryId=" + categoryId +
+                '}';
+    }
 }

@@ -1,11 +1,17 @@
 package com.dglapps.fiestadelarbol.services;
 
 import android.content.Context;
+import android.util.Log;
 import com.dglapps.fiestadelarbol.domain.Category;
 import com.dglapps.fiestadelarbol.domain.Question;
-import com.dglapps.fiestadelarbol.repositories.QuestionRepository;
+import com.dglapps.fiestadelarbol.repositories.GoogleDriveQuestionRepository;
+import com.dglapps.fiestadelarbol.repositories.LocalQuestionRepository;
+import io.reactivex.Single;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 import java.util.*;
+import java.util.concurrent.Callable;
 
 public class QuestionService {
 
@@ -16,9 +22,29 @@ public class QuestionService {
         questionsByCategory = new HashMap<>();
     }
 
-    public void loadQuestions(Context context) {
-        originalQuestions = new QuestionRepository(context).getAllQuestions();
-        buildMap(originalQuestions);
+    public Single<Integer> loadQuestions(final Context context) {
+        return Single.fromCallable(new Callable<Integer>() {
+            @Override
+            public Integer call() {
+                loadFromDrive();
+                if (originalQuestions.isEmpty()) {
+                    Log.i("QUIZ", "No questions found from internet, trying local file");
+                    loadLocally(context);
+                }
+                buildMap(originalQuestions);
+                return originalQuestions.size();
+            }
+        }).observeOn(AndroidSchedulers.mainThread())
+        .subscribeOn(Schedulers.io());
+
+    }
+
+    private void loadFromDrive() {
+        originalQuestions = new GoogleDriveQuestionRepository().getAllQuestions();
+    }
+
+    private void loadLocally(Context context) {
+        originalQuestions = new LocalQuestionRepository(context).getAllQuestions();
     }
 
     private void buildMap(List<Question> questions) {

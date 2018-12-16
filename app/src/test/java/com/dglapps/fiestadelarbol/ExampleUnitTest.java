@@ -1,6 +1,10 @@
 package com.dglapps.fiestadelarbol;
 
+import com.dglapps.fiestadelarbol.domain.Question;
+import com.dglapps.fiestadelarbol.repositories.GoogleDriveQuestionRepository;
 import org.junit.Test;
+
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -13,5 +17,11 @@ public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
+    }
+
+    @Test
+    public void testDownloadJSON() {
+        List<Question> questions = new GoogleDriveQuestionRepository().getAllQuestions();
+        System.out.println(questions);
     }
 }
