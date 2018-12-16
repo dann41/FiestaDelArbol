@@ -6,10 +6,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import com.dglapps.fiestadelarbol.PlayerSelectionActivity;
 import com.dglapps.fiestadelarbol.R;
@@ -20,7 +20,6 @@ public class AddPlayerDialogFragment extends DialogFragment {
 
     private EditText playerNameInput;
     private View[] avatarViews;
-    private Button addPlayerButton;
 
     private Player player;
     private int selectedAvatarId;
@@ -50,9 +49,7 @@ public class AddPlayerDialogFragment extends DialogFragment {
             });
         }
 
-        this.addPlayerButton = view.findViewById(R.id.add_player);
-
-        addPlayerButton.setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.add_player).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 savePlayer();
@@ -70,12 +67,25 @@ public class AddPlayerDialogFragment extends DialogFragment {
             }
         });
 
+        view.findViewById(R.id.close_dialog).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
+
         initPlayer();
 
         return new AlertDialog.Builder(getContext(), R.style.Theme_AppCompat_Light_Dialog_MinWidth)
                 .setView(view)
                 .setCancelable(false)
                 .create();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        getDialog().getWindow().setBackgroundDrawableResource(android.R.color.transparent);
     }
 
     private void selectAvatar(int avatarId) {
