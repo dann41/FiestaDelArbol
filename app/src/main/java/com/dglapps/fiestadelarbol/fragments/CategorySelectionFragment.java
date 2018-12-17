@@ -39,7 +39,8 @@ public class CategorySelectionFragment extends Fragment {
         View v = inflater.inflate(R.layout.category_selection_layout, container, false);
 
         luckyWheel = v.findViewById(R.id.wheel);
-        setWheelDuration(2000);
+        luckyWheel.setRotationTime(2000);
+        luckyWheel.setRotations(5);
         //luckyWheel.setBackgroundColor(getResources().getColor(R.color.white, null));
         luckyWheel.addWheelItems(getWheelItems());
         luckyWheel.setOnClickListener(new View.OnClickListener() {
@@ -105,22 +106,4 @@ public class CategorySelectionFragment extends Fragment {
         return wheelItems;
     }
 
-    private void setWheelDuration(int durationInMs) {
-        WheelView wheelView = null;
-        try {
-            Field field = luckyWheel.getClass().getDeclaredField("wheelView");
-            field.setAccessible(true);
-            wheelView = (WheelView) field.get(luckyWheel);
-            Field durationField = wheelView.getClass().getDeclaredField("DEFAULT_ROTATION_TIME");
-            durationField.setAccessible(true);
-
-            /*Field modifiersField = Field.class.getDeclaredField("modifiers");
-            modifiersField.setAccessible(true);
-            modifiersField.setInt(durationField, durationField.getModifiers() & ~Modifier.FINAL);*/
-
-            durationField.set(wheelView, durationInMs);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }
