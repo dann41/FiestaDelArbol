@@ -48,6 +48,7 @@ public class QuestionService {
     }
 
     private void buildMap(List<Question> questions) {
+        questionsByCategory.clear();
         for (Question q : questions) {
             List<Question> categoryList = questionsByCategory.get(q.getCategoryId());
             if (categoryList == null) {

@@ -124,10 +124,12 @@ public class CategoryFragment extends Fragment {
         categoryView.setText(category.getNameId());
         categoryView.setCompoundDrawablesWithIntrinsicBounds(category.getIconId(), 0, 0, 0);
 
-        questionView.setText(question.getQuestion());
+        if (question != null) {
+            questionView.setText(question.getQuestion());
 
-        answerView.setVisibility(View.INVISIBLE);
-        answerView.setText(question.getAnswer());
+            answerView.setVisibility(View.INVISIBLE);
+            answerView.setText(question.getAnswer());
+        }
 
         if (category.isAnswerRequired()) {
             nextButton.setEnabled(false);
